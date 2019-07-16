@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <title>Leafie Awards!</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+    </head>
+
+    <div class="container-fluid bg-1 text-center">
+        <h3>Leafie Awards!</h3>
+        <p>~~~ Go ahead and select an intern and nominate them for upto 5 awards! ~~~</p>
+    </div>
+    <div class="container-fluid bg-2 text-center" style="height: 0.5%">
+        <form action="">
+            <select id="selectedone" name="interns" style="background-color: #91C851; color: black; height: 100%; width: 25%;">
+              <!-- <option value="Member 1">Intern 1</option>
+              <option value="Member 2">Intern 2</option>
+              <option value="Member 3">Intern 3</option> -->
+              {{# each listofmems }}
+                    <option value="{{ this }}">{{this}}</option>
+                      {{/each}}
+            </select>
+        </form>
+    </div>
+
+    <div class="container-fluid bg-2 text-center" style="height: 55%">
+     <!-- Categories box -->
+        <div id="" style="background-color: rgba(144, 200, 81, 0.603); height: 100%; width: 60%; border-radius: 25px; overflow-y: auto; padding: 1.5%; margin-left: 20%; margin-right: 20%">
+                <h3>Categories</h3>
+                <ul><li class="li">
+                    <div style="text-align: left; font-size: 120%">
+                            {{ this.category }}
+                        <input type="checkbox" name="{{this.category}};" value="t" style="height: 17px; width: 17px" onclick="">
+                    </div>
+                </li></ul>
+        </div>
+    </div>
+        <div class="container-fluid bg-3 text-center">
+            <h3>Thank you for voting! :)</h3>
+            <p>Feel free to slack us if you have any questions! - Elizabeth Han, Rhea Goyal, Sam Pal, Sandy Gould </p>
+        </div>
+    </body>
+    </html>
+
+<style>
+    @import url('https://fonts.googleapis.com/css?family=Numans');
+    html, body {
+        background-size: cover;
+        background-repeat: repeat;
+        height: 100%;
+        font-family: 'Numans', sans-serif;
+    }
+    .bg-1 {
+        background-color:   #116149;
+        color:  #B8E6CB;
+    }
+    .bg-2 {
+        background-color:   #FAFBFC;
+        color: #21313C;
+    }
+    .bg-3 {
+        background-color:  #21313C;
+        color: #ffffff;
+    }
+
+    .btn {
+        position: relative;
+        text-align: center;
+        color: aliceblue;
+        padding-top: 12px;
+        border-radius: 25px;
+    }
+
+    .container-fluid {
+        padding-top: 50px;
+        padding-bottom: 70px;
+    }
+</style>
+
+<script>
+    function display_button() {
+    //   document.getElementById("category")
+      <button type="button" class="btn btn-success">Success</button>
+    }
+</script>
