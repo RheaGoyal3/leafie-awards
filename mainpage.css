@@ -1,0 +1,54 @@
+@import url('https://fonts.googleapis.com/css?family=Numans');
+    
+html, body {
+        background-size: cover;
+        background-repeat: repeat;
+        height: 100%;
+        font-family: 'Numans', sans-serif;
+}
+    
+#category_box {
+    background-color: rgba(144, 200, 81, 0.603);
+    height: 100%;
+    width: 60%;
+    border-radius: 25px;
+    overflow-y: auto;
+    padding: 1.5%;
+    margin-left: 20%;
+    margin-right: 20%
+}
+
+#selectedone {
+    background-color: #91C851;
+    color: black; 
+    height: 100%;
+    width: 25%;
+}
+
+.bg-1 {
+    background-color: #116149;
+    color:  #B8E6CB;
+}
+   
+.bg-2 {
+    background-color: #FAFBFC;
+    color: #21313C;
+}
+    
+.bg-3 {
+    background-color: #21313C;
+    color: #ffffff;
+}
+
+.btn {
+    position: relative;
+    text-align: center;
+    color: aliceblue;
+    padding-top: 12px;
+    border-radius: 25px;
+}
+
+.container-fluid {
+    padding-top: 50px;
+    padding-bottom: 70px;
+}
