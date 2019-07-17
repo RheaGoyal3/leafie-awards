@@ -7,6 +7,11 @@ html, body {
         font-family: 'Numans', sans-serif;
 }
 
+#categories {
+    height: 55%;
+    padding-top: 0.1%
+}
+
 #category_box {
     background-color: rgba(144, 200, 81, 0.603);
     height: 100%;
@@ -18,10 +23,31 @@ html, body {
     margin-right: 20%
 }
 
+#interndrop {
+    padding-top: 3%;
+    padding-bottom: 2%
+}
+
+#mainpanel {
+    padding-top: 1%;
+    padding-bottom: 0.5%
+}
+
 #selectedone {
     background-color: #91C851;
     color: black;
-    height: 100%;
+    font-size: 150%;
+}
+
+#thankyou {
+    background-color: #21313C;
+    color: #ffffff;
+}
+
+#welcome {
+    background-color: #116149;
+    color:  #B8E6CB;
+    padding-bottom: 1%
 }
 
 .bg-1 {
