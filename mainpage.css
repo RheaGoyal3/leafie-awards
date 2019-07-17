@@ -7,9 +7,8 @@ html, body {
         font-family: 'Numans', sans-serif;
 }
 
-#categories {
-    height: 55%;
-    padding-top: 0.1%
+.category {
+    height: 200px;
 }
 
 #category_box {
@@ -17,6 +16,8 @@ html, body {
     border-radius: 25px;
     overflow-y: auto;
     padding: 1.5%;
+    width: 95%;
+    height: 95%;
 }
 
 #interndrop {
@@ -27,7 +28,6 @@ html, body {
 #selectedone {
     background-color: #91C851;
     color: black;
-    font-size: 150%;
 }
 
 #thankyou {
