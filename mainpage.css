@@ -14,23 +14,14 @@ html, body {
 
 #category_box {
     background-color: rgba(144, 200, 81, 0.603);
-    height: 100%;
-    width: 60%;
     border-radius: 25px;
     overflow-y: auto;
     padding: 1.5%;
-    margin-left: 20%;
-    margin-right: 20%
 }
 
 #interndrop {
-    padding-top: 3%;
-    padding-bottom: 2%
-}
-
-#mainpanel {
-    padding-top: 1%;
-    padding-bottom: 0.5%
+    padding-top: 0%;
+    padding-bottom: 3%
 }
 
 #selectedone {
@@ -48,6 +39,11 @@ html, body {
     background-color: #116149;
     color:  #B8E6CB;
     padding-bottom: 1%
+}
+
+#welcomepanel {
+    padding-top: 1%;
+    padding-bottom: 0.5%
 }
 
 .bg-1 {
@@ -77,4 +73,9 @@ html, body {
 .container-fluid {
     padding-top: 50px;
     padding-bottom: 70px;
+}
+
+.no-gutters {
+    margin-right: 0;
+    margin-left: 0;
 }
