@@ -8,6 +8,18 @@
         <link rel="stylesheet" type="text/css" href="mainpage.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+        <script src="https://s3.amazonaws.com/stitch-sdks/js/bundles/4.4.0/stitch.js"></script>
+        <script>
+            // Initialize the App Client
+            const client = stitch.Stitch.initializeDefaultAppClient("leafieawards-zsmmj");
+            // Get a MongoDB Service Client
+            const mongodb = client.getServiceClient(
+                stitch.RemoteMongoClient.factory,
+                "mongodb-atlas"
+            );
+            // Get a reference to the intern database
+            const db = mongodb.db("leafie_awards")
+        </script>
         <script src="mainpage.js"></script>
     </head>
 
@@ -36,10 +48,10 @@
          <!-- Categories box -->
             <div id="category_box">
                     <h3>Categories</h3>
-                    <ul><li class="li">
+                    <ul><li class="li" style="list-style: none;">
                         <div style="text-align: left; font-size: 120%">
-                                {{ this.category }}
                             <input type="checkbox" name="{{this.category}};" value="t" style="height: 17px; width: 17px" onclick="">
+                                {{ this.category }}
                         </div>
                     </li></ul>
             </div>
