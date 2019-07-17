@@ -24,11 +24,13 @@ MongoClient.connect(uri, { useNewUrlParser: true }, (err, client) => {
 
   people.find().forEach((doc) => {
     peopleArray.push(doc.name);
-  }).then(() => { client.close() });
-
-  // superlatives.find().forEach((doc) => {
-  //   superlativesArray.push(doc.superlative);
-  // });
+  }).then(() => {
+    superlatives.find().forEach((doc) => {
+      superlativesArray.push(doc.superlative);
+    }).then(() => {
+        client.close()
+    });
+  });
 
   app.listen(port, () => console.log(`Example app listening on port ${port}!`));
 });
@@ -36,5 +38,5 @@ MongoClient.connect(uri, { useNewUrlParser: true }, (err, client) => {
 app.engine('html', require('ejs').renderFile);
 
 app.get('/leafie-awards', (req, res) => {
-  res.render(__dirname + '/index.html', { people: peopleArray });
+  res.render(__dirname + '/index.html', { people: peopleArray, superlatives: superlativesArray });
 });

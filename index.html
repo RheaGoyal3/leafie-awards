@@ -48,8 +48,11 @@
                         <ul>
                             <li class="li" style="list-style: none;">
                                 <div style="text-align: left; font-size: 120%">
+                                  <% superlatives.forEach(function(superlative){ %>
                                     <input type="checkbox" name="{{this.category}};" value="t" style="height: 17px; width: 17px" onclick="">
-                                        {{ this.category }}
+                                        <%= superlative %>
+                                        <br>
+                                  <% }); %>
                                 </div>
                             </li>
                         </ul>
