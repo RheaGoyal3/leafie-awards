@@ -19,8 +19,8 @@ MongoClient.connect(uri, { useNewUrlParser: true }, (err, client) => {
 
 });
 
-app.use(express.static(__dirname));
+app.use(express.static(path.join(__dirname, 'public')));
 
 app.get('/', (req, res) => {
-  res.sendFile(__dirname + '/mainpage.html');
+  res.sendFile(__dirname + '/public/mainpage.html');
 });
