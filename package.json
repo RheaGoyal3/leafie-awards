@@ -1,0 +1,26 @@
+{
+  "name": "leafie-awards",
+  "version": "1.0.0",
+  "description": "",
+  "main": "driver.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node mainpage.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RheaGoyal3/leafie-awards.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/RheaGoyal3/leafie-awards/issues"
+  },
+  "homepage": "https://github.com/RheaGoyal3/leafie-awards#readme",
+  "dependencies": {
+    "ejs": "*",
+    "express": "*",
+    "mongodb": "*",
+    "pug": "^2.0.4"
+  }
+}

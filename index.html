@@ -31,9 +31,9 @@
                     <form action="">
                         <div class="form-group">
                             <select id="selectedone" class="form-control form-control-lg" name="interns">
-                                {{# each listofmems }}
-                                    <option value="{{ this }}">{{this}}</option>
-                                {{/each}}
+                              <% people.forEach(function(person){ %>
+                                    <option value="person"><%= person %></option>
+                              <% }); %>
                             </select>
                         </div>
                     </form>
@@ -112,4 +112,3 @@
         </div>
     </body>
 </html>
-
