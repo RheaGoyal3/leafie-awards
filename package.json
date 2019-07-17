@@ -18,8 +18,9 @@
   },
   "homepage": "https://github.com/RheaGoyal3/leafie-awards#readme",
   "dependencies": {
-    "mongodb": "*",
+    "ejs": "*",
     "express": "*",
-    "ejs": "*"
+    "mongodb": "*",
+    "pug": "^2.0.4"
   }
 }

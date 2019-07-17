@@ -12,7 +12,7 @@ const dbName = 'leafie_awards';
 let peopleArray = [];
 let superlativesArray = [];
 
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname)));
 app.use(bodyParser.urlencoded({ extended: false }));
 
 MongoClient.connect(uri, { useNewUrlParser: true }, (err, client) => {
@@ -24,12 +24,10 @@ MongoClient.connect(uri, { useNewUrlParser: true }, (err, client) => {
 
   people.find().forEach((doc) => {
     peopleArray.push(doc.name);
-    client.close();
-  });
+  }).then(() => { client.close() });
 
   // superlatives.find().forEach((doc) => {
-  //   superlativesArray.push(doc.name);
-  //   client.close();
+  //   superlativesArray.push(doc.superlative);
   // });
 
   app.listen(port, () => console.log(`Example app listening on port ${port}!`));
@@ -37,9 +35,6 @@ MongoClient.connect(uri, { useNewUrlParser: true }, (err, client) => {
 
 app.engine('html', require('ejs').renderFile);
 
-app.get('/', (req, res) => {
-  res.render(__dirname + '/public/mainpage.html', { people: peopleArray });
-  // res.sendFile(__dirname + '/public/mainpage.html');
-  // res.render('', { items: peopleArray });
-  // res.send(peopleArray);
+app.get('/leafie-awards', (req, res) => {
+  res.render(__dirname + '/index.html', { people: peopleArray });
 });
