@@ -12,12 +12,6 @@
     </head>
 
     <body>
-      <h2> people </h2>
-      <ul>
-      <% people.forEach(function(peep) { %>
-          <li><%= peep %> </li>
-      <% }); %>
-      </ul>
         <!-- Main panel -->
         <div class="container-fluid bg-1 text-center">
             <h3>Leafie Awards!</h3>
@@ -28,12 +22,9 @@
         <div class="container-fluid bg-2 text-center" style="height: 0.5%">
             <form action="">
                 <select id="selectedone" name="interns">
-                  <!-- <option value="Member 1">Intern 1</option>
-                  <option value="Member 2">Intern 2</option>
-                  <option value="Member 3">Intern 3</option> -->
-                  {{# each listofmems }}
-                        <option value="{{ this }}">{{this}}</option>
-                          {{/each}}
+                  <% people.forEach(function(person){ %>
+                        <option value=" person"><%= person %></option>
+                  <% }); %>
                 </select>
             </form>
         </div>

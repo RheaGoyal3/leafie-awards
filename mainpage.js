@@ -1,14 +1,19 @@
 'use strict';
 const express = require('express');
-const port = 3000;
+const bodyParser = require('body-parser');
 const path = require('path');
+
 const app = express();
+const port = 3000;
 const MongoClient = require('mongodb').MongoClient;
 
 const uri = 'mongodb+srv://sam:sam1@cluster0-nge8c.mongodb.net/test?retryWrites=true&w=majority';
 const dbName = 'leafie_awards';
 let peopleArray = [];
 let superlativesArray = [];
+
+app.use(express.static(path.join(__dirname, 'public')));
+app.use(bodyParser.urlencoded({ extended: false }));
 
 MongoClient.connect(uri, { useNewUrlParser: true }, (err, client) => {
   if (err) console.log(err);
@@ -30,11 +35,11 @@ MongoClient.connect(uri, { useNewUrlParser: true }, (err, client) => {
   app.listen(port, () => console.log(`Example app listening on port ${port}!`));
 });
 
-app.use(express.static(path.join(__dirname, 'public')));
+app.engine('html', require('ejs').renderFile);
 
 app.get('/', (req, res) => {
-  res.sendFile(__dirname + '/public/mainpage.html');
-  // res.render('index', { items: peopleArray });
-  res.send(peopleArray);
-  // res.send(superlativesArray);
+  res.render(__dirname + '/public/mainpage.html', { people: peopleArray });
+  // res.sendFile(__dirname + '/public/mainpage.html');
+  // res.render('', { items: peopleArray });
+  // res.send(peopleArray);
 });
