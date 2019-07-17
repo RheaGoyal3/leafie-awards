@@ -4,7 +4,8 @@
   "description": "",
   "main": "driver.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node ./bin/www"
   },
   "repository": {
     "type": "git",
@@ -17,6 +18,7 @@
   },
   "homepage": "https://github.com/RheaGoyal3/leafie-awards#readme",
   "dependencies": {
-    "mongodb": "*"
+    "mongodb": "*",
+    "express": "*"
   }
 }
