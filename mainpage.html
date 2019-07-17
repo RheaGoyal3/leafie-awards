@@ -9,49 +9,90 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
         <script src="mainpage.js"></script>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     </head>
 
     <body>
         <!-- Main panel -->
-        <div class="container-fluid bg-1 text-center" style="padding: 1%">
-            <h3>Leafie Awards!</h3>
+        <div class="container-fluid bg-1 text-center" style="padding: 1%; font-size:200%">
+            <h1>Leafie Awards!</h1>
             <p>~~~ Go ahead and select an intern or recruiter and nominate them for upto 5 awards! ~~~</p>
         </div>
 
         <!-- Intern dropdown -->
-        <div class="container-fluid bg-2 text-center" style="padding-top: 3%; padding-bottom: 2%">
-            <form action="">
-                <select id="selectedone" name="interns" style="width: 60%">
-                  <!-- <option value="Member 1">Intern 1</option>
-                  <option value="Member 2">Intern 2</option>
-                  <option value="Member 3">Intern 3</option> -->
-                  {{# each listofmems }}
-                        <option value="{{ this }}">{{this}}</option>
-                          {{/each}}
-                </select>
-            </form>
+        <div class="voting"  style = "text-align: center">
+            <div class="container">
+                <div class="row no-gutters justify-content-center" >
+                        <div class="container-fluid text-center" style="padding-top: 3%; padding-bottom: 2%;">
+                                <form action="">
+                                    <select id="selectedone" name="interns" style="width: 70%;">
+                                    {{# each listofmems }}
+                                        <option value="{{ this }}">{{this}}</option>
+                                        {{/each}}
+                                    </select>
+                                </form>
+                            </div>
+                        <div class="w-100">
+                        </div>
+                    <div class="col" style="padding-left: 15%">
+                        <div id="category_box" style="height: 200px; width: 350px">
+                            <h3>General</h3>
+                            <ul><li class="li" style="list-style: none;">
+                                <div style="text-align: left; font-size: 120%">
+                                    <input type="checkbox" name="{{this.category}};" value="t" style="height: 17px; width: 17px" onclick="">
+                                        {{ this.category }}
+                                </div>
+                            </li></ul>
+                        </div>
+                    </div>
+                    <div class="col" style="padding-left: 0%">
+                            <div id="category_box" style="height: 200px; width: 350px">
+                                <h3>Work</h3>
+                                <ul><li class="li" style="list-style: none;">
+                                    <div style="text-align: left; font-size: 120%">
+                                        <input type="checkbox" name="{{this.category}};" value="t" style="height: 17px; width: 17px" onclick="">
+                                            {{ this.category }}
+                                    </div>
+                                </li></ul>
+                            </div>
+                        </div>
+
+                    <div class="w-100">
+                        <br>
+                    </div>
+
+                    <div class="col" style="padding-left: 15%">
+                            <div id="category_box" style="height: 200px; width: 350px">
+                                <h3>Food</h3>
+                                <ul><li class="li" style="list-style: none;">
+                                    <div style="text-align: left; font-size: 120%">
+                                        <input type="checkbox" name="{{this.category}};" value="t" style="height: 17px; width: 17px" onclick="">
+                                            {{ this.category }}
+                                    </div>
+                                </li></ul>
+                            </div>
+                        </div>
+                        <div class="col" style="padding-left: 0%">
+                                <div id="category_box" style="height: 200px; width: 350px">
+                                    <h3>Travel</h3>
+                                    <ul><li class="li" style="list-style: none;">
+                                        <div style="text-align: left; font-size: 120%">
+                                            <input type="checkbox" name="{{this.category}};" value="t" style="height: 17px; width: 17px" onclick="">
+                                                {{ this.category }}
+                                        </div>
+                                    </li></ul>
+                                </div>
+                        </div>
+                </div>
+            </div>
         </div>
 
-        <div class="container-fluid bg-2 text-center" style="height: 55%; padding-top: 0.1%">
-         <!-- Categories box -->
-            <div id="category_box">
-                    <h3>Categories</h3>
-                    <ul><li class="li" style="list-style: none;">
-                        <div style="text-align: left; font-size: 120%">
-                            <input type="checkbox" name="{{this.category}};" value="t" style="height: 17px; width: 17px" onclick="">
-                                {{ this.category }}
-                        </div>
-                    </li></ul>
-            </div>
-            <br>
-            <button type="submit" class="btn btn-success" onclick="">Nominate</button>
-        </div>
-        <br>
-        <!-- Thank you panel -->
-        <div class="container-fluid bg-3 text-center">
-            <h3>Thank you for voting! :)</h3>
-            <p>Feel free to slack us if you have any questions! - Elizabeth Han, Rhea Goyal, Sam Pal, Sandy Gould </p>
-        </div>
+    <br>
+    <!-- Thank you panel -->
+    <div class="container-fluid bg-3 text-center" style="font-size: 150%">
+        <h1>Thank you for voting! :)</h1>
+        <p>Feel free to slack us if you have any questions! - Elizabeth Han, Rhea Goyal, Sam Pal, Sandy Gould </p>
+    </div>
 
     </body>
 </html>
