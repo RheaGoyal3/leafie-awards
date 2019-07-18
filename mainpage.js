@@ -10,28 +10,28 @@ const uri = 'mongodb+srv://sam:sam1@cluster0-nge8c.mongodb.net/test?retryWrites=
 const dbName = 'leafie_awards';
 let peopleArray = [];
 let superlativesArray = [];
-let db;
-let people;
-let superlatives;
+let db, people, superlatives;
 
-app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(__dirname));
-// app.use(bodyParser.text({ type: 'text/html' }))
+
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.text({ type: 'application/json' }))
+app.use(bodyParser.json())
 
 MongoClient.connect(uri, { useNewUrlParser: true }, (err, client) => {
   if (err) console.log(err);
 
   db = client.db(dbName);
-  const people = db.collection('people');
-  const superlatives = db.collection('superlatives');
+  people = db.collection('people');
+  superlatives = db.collection('superlatives');
 
   people.find().forEach((doc) => {
-    peopleArray.push(doc.name);
+    peopleArray.push(doc);
   }).then(() => {
     superlatives.find().forEach((doc) => {
       superlativesArray.push(doc);
     }).then(() => {
-        client.close()
+        // client.close()
     });
   });
 
@@ -45,23 +45,13 @@ app.get('/leafie-awards', (req, res) => {
 });
 
 app.post('/form', (req, res) => {
-  // console.log('req.body.person', req.body.person);
-  // console.log('req.body.general', req.body.general);
-  // console.log('req.body.work', req.body.work);
-  // console.log('req.body.sports_games', req.body.sports_games);
-  // console.log('req.body.outside_work', req.body.outside_work);
-  res.send(req.body.sports_games);
+  const name = req.body.person;
+  const work = Array.isArray(req.body.work) ? req.body.work : [req.body.work];
+  const sports_games = Array.isArray(req.body.sports_games) ? req.body.sports_games : [req.body.sports_games];
+  const outside_work = Array.isArray(req.body.outside_work) ? req.body.outside_work : [req.body.outside_work];
+  const general = Array.isArray(req.body.general) ? req.body.general : [req.body.general];
+  const noms = [...work, ...sports_games, ...outside_work, ...general].filter(x => x);
+  // people.aggregate([ {$group : { nominations: "$nominations", count : {$sum : 1}}} ]);
+  people.updateOne( { name: name }, { $set : { "nominations" : noms }})
+  res.send(JSON.stringify(req.body));
 });
-
-// app.post('/nominated', (req, res) => {
-//   console.log('nominates');
-//   // people.updateOne( { name: "Sam Pal" }, { $set : { "nominations" : ["Best Whatever", "Great Person", "something something", "anotha 1"] }})
-//   res.sendStatus(201);
-// });
-//
-// app.get('/nominate', (req, res) => {
-//   people.find().toArray((err, result) => {
-//     if (err) console.log(err);
-//     res.rend(result)
-//   });
-// });
