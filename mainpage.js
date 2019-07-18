@@ -38,6 +38,6 @@ MongoClient.connect(uri, { useNewUrlParser: true }, (err, client) => {
 
 app.engine('html', require('ejs').renderFile);
 
-app.get('/', (req, res) => {
+app.get('/nominate', (req, res) => {
   res.render(__dirname + '/index.html', { people: peopleArray, superlatives: superlativesArray });
 });
