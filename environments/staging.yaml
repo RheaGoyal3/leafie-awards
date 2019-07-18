@@ -1,0 +1,6 @@
+ingress:
+  enabled: true
+  hosts:
+    - leafie-awards.skunkworks.staging.corp.mongodb.com
+service:
+  targetPort: 8080
