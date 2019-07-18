@@ -21,6 +21,6 @@
     "ejs": "*",
     "express": "*",
     "mongodb": "*",
-    "pug": "^2.0.4"
+    "body-parser": "*"
   }
 }
