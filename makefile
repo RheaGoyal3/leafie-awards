@@ -14,10 +14,6 @@ context:  ## Set the kubectl context to staging cluster and skunkworks namespace
 	kubectl config use-context api.staging.corp.mongodb.com
 	kubectl config set-context api.staging.corp.mongodb.com --namespace=skunkworks
 
-# .PHONY: login
-# login: context  ## Login to the AWS ECR for skunkworks. Login is valid for 12 hours
-# 	./scripts/ecr-login.sh
-
 .PHONY: create
 create: login context ## Creates your ECR docker repository
 	./scripts/ecr-create.sh
