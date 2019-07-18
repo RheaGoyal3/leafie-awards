@@ -46,9 +46,19 @@ html, body {
     padding-bottom: 0.5%
 }
 
+#card {
+    font-size: 200%;
+    text-align: left;
+}
+
+#checkbox {
+    height: 20px;
+    width: 20px;
+}
+
 #title {
     display: inline;
-    font-size: 200%;
+    font-size: 230%;
     font-weight: 250%;
     vertical-align: middle;
 }

@@ -30,7 +30,7 @@
                 <div class="col">
                     <form action="">
                         <div class="form-group">
-                            <select id="selectedone" class="form-control form-control-lg" name="interns">
+                            <select id="selectedone" class="form-control form-control-lg" name="interns" style="font-size: 220%">
                                 <% people.forEach(function(person){ %>
                                     <option value="person"><%= person %></option>
                                 <% }); %>
@@ -48,10 +48,10 @@
                         <p id="title">General</p>
                         <ul>
                             <li class="li" style="list-style: none;">
-                                <div style="text-align: left; font-size: 120%">
+                                <div id="card">
                                   <% superlatives.forEach(function(superlative){ %>
                                     <% if (superlative.general) { %>
-                                        <input type="checkbox" name="{{this.category}};" value="t" style="height: 17px; width: 17px" onclick="">
+                                        <input id="checkbox" type="checkbox" name="{{this.category}};" value="t" style="height: 17px; width: 17px" onclick="">
                                           <%= superlative.general %>
                                           <br>
                                     <% } %>
@@ -67,10 +67,10 @@
                         <p id="title">Games/Sports</p>
                         <ul>
                             <li class="li" style="list-style: none;">
-                                <div style="text-align: left; font-size: 120%">
+                                <div id="card">
                                   <% superlatives.forEach(function(superlative){ %>
                                     <% if (superlative.work) { %>
-                                        <input type="checkbox" name="{{this.category}};" value="t" style="height: 17px; width: 17px" onclick="">
+                                        <input id="checkbox" type="checkbox" name="{{this.category}};" value="t" style="height: 17px; width: 17px" onclick="">
                                           <%= superlative.work %>
                                           <br>
                                     <% } %>
@@ -89,10 +89,10 @@
                         <p id="title">Work</p>
                         <ul>
                             <li class="li" style="list-style: none;">
-                                <div style="text-align: left; font-size: 120%">
+                                <div id="card">
                                   <% superlatives.forEach(function(superlative){ %>
                                     <% if (superlative.sports_games) { %>
-                                        <input type="checkbox" name="{{this.category}};" value="t" style="height: 17px; width: 17px" onclick="">
+                                        <input id="checkbox" type="checkbox" name="{{this.category}};" value="t" style="height: 17px; width: 17px" onclick="">
                                           <%= superlative.sports_games %>
                                           <br>
                                     <% } %>
@@ -104,14 +104,14 @@
                 </div>
                 <div class="col category">
                     <div id="category_box" style="height: 200px;">
-                        <img src="https://img.icons8.com/cotton/64/000000/confetti--v1.png" style="height: 12%;">
+                        <img src="https://img.icons8.com/bubbles/50/000000/natural-food.png" style="height: 12%;">
                         <p id="title">Outside Work</p>
                         <ul>
                             <li class="li" style="list-style: none;">
-                                <div style="text-align: left; font-size: 120%">
+                                <div id="card">
                                   <% superlatives.forEach(function(superlative){ %>
                                     <% if (superlative.outside_work) { %>
-                                        <input type="checkbox" name="{{this.category}};" value="t" style="height: 17px; width: 17px" onclick="">
+                                        <input id="checkbox" type="checkbox" name="{{this.category}};" value="t" onclick="">
                                           <%= superlative.outside_work %>
                                           <br>
                                     <% } %>
