@@ -4,7 +4,7 @@ const bodyParser = require('body-parser');
 const path = require('path');
 
 const app = express();
-const port = 8080;
+const port = 3000;
 const MongoClient = require('mongodb').MongoClient;
 
 const uri = "mongodb+srv://rhea:rhea1@cluster0-nge8c.mongodb.net/test?retryWrites=true&w=majority";
@@ -28,7 +28,6 @@ MongoClient.connect(uri, { useNewUrlParser: true }, (err, client) => {
     superlatives.find().forEach((doc) => {
       superlativesArray.push(doc);
     }).then(() => {
-        console.log("in here")
         client.close()
     });
   });

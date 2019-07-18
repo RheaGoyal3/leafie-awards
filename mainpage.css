@@ -46,6 +46,12 @@ html, body {
     padding-bottom: 0.5%
 }
 
+#title {
+    display: inline;
+    font-size: 200%;
+    font-weight: 250%;
+    vertical-align: middle;
+}
 .bg-1 {
     background-color: #116149;
     color:  #B8E6CB;
