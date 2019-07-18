@@ -38,6 +38,6 @@ MongoClient.connect(uri, { useNewUrlParser: true }, (err, client) => {
 
 app.engine('html', require('ejs').renderFile);
 
-app.get('/leafie-awards', (req, res) => {
+app.get('/', (req, res) => {
   res.render(__dirname + '/index.html', { people: peopleArray, superlatives: superlativesArray });
 });
