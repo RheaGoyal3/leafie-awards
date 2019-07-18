@@ -15,7 +15,7 @@ pipeline:
   deploy-staging:
     image: quay.io/ipedrazas/drone-helm
     # The release name should be unique across the namespace, the app or repo name is recommended
-    release: skunkworks-getstarted
+    release: leafie-awards
     namespace: skunkworks
     environment:
       - API_SERVER=https://api.staging.corp.mongodb.com
