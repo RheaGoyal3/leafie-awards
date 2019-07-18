@@ -26,8 +26,9 @@ MongoClient.connect(uri, { useNewUrlParser: true }, (err, client) => {
     peopleArray.push(doc.name);
   }).then(() => {
     superlatives.find().forEach((doc) => {
-      superlativesArray.push(doc.superlative);
+      superlativesArray.push(doc);
     }).then(() => {
+        console.log("in here")
         client.close()
     });
   });
