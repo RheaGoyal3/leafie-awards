@@ -30,7 +30,7 @@
             <div class="row no-gutters align-items-center" id="interndrop">
                 <div class="col">
                     <div class="form-group">
-                        <select id="selectedone" class="form-control form-control-lg" name="person">
+                        <select id="selectedone" class="form-control form-control-lg" name="interns" style="font-size: 220%">
                             <% people.forEach(function(person){ %>
                                 <option name="person" value="<%= person.name %>"> <%= person.name %> </option>
                             <% }); %>
@@ -43,14 +43,14 @@
             <div class="row no-gutters justify-content-center">
                 <div class="col category">
                     <div id="category_box" style="height: 200px;">
-                        <img src="https://img.icons8.com/dusk/64/000000/leaf.png" style="height: 10%;">
-                        <h3 style="display: inline">General</h3>
+                        <img src="https://img.icons8.com/dusk/64/000000/leaf.png" style="display: inline; height: 25px; width: 25px ">
+                        <p id="title">General</p>
                         <ul>
                             <li class="li" style="list-style: none;">
-                                <div style="text-align: left; font-size: 120%">
+                                <div id="card">
                                   <% superlatives.forEach(function(superlative){ %>
                                     <% if (superlative.general) { %>
-                                        <input type="checkbox" name="general" value="<%= superlative.general %>" style="height: 17px; width: 17px" onclick="">
+                                        <input id="checkbox" type="checkbox" name="general" value="<%= superlative.general %>" style="height: 17px; width: 17px" onclick="">
                                           <%= superlative.general %>
                                           <br>
                                     <% } %>
@@ -63,13 +63,13 @@
                 <div class="col category">
                     <div id="category_box" style="height: 200px;">
                         <img src="https://img.icons8.com/color/48/000000/nintendo-gamecube-controller.png" style="height: 12%;">
-                        <h3 style="display: inline">Games/Sports</h3>
+                        <p id="title">Games/Sports</p>
                         <ul>
                             <li class="li" style="list-style: none;">
-                                <div style="text-align: left; font-size: 120%">
+                                <div id="card">
                                   <% superlatives.forEach(function(superlative){ %>
                                     <% if (superlative.sports_games) { %>
-                                        <input type="checkbox" name="sports_games" value="<%= superlative.sports_games %>" style="height: 17px; width: 17px" onclick="">
+                                        <input id="checkbox" type="checkbox" name="sports_games" value="<%= superlative.sports_games %>" style="height: 17px; width: 17px" onclick="">
                                           <%= superlative.sports_games %>
                                           <br>
                                     <% } %>
@@ -85,13 +85,13 @@
                 <div class="col category">
                     <div id="category_box" style="height: 200px;">
                         <img src="https://img.icons8.com/ios-filled/50/000000/programming.png" style="height: 12%;">
-                        <h3 style="display: inline">Work</h3>
+                        <p id="title">Work</p>
                         <ul>
                             <li class="li" style="list-style: none;">
-                                <div style="text-align: left; font-size: 120%">
+                                <div id="card">
                                   <% superlatives.forEach(function(superlative){ %>
                                     <% if (superlative.work) { %>
-                                        <input type="checkbox" name="work" value="<%= superlative.work %>" style="height: 17px; width: 17px" onclick="">
+                                        <input id="checkbox" type="checkbox" name="work" value="<%= superlative.work %>" style="height: 17px; width: 17px" onclick="">
                                           <%= superlative.work %>
                                           <br>
                                     <% } %>
@@ -103,14 +103,14 @@
                 </div>
                 <div class="col category">
                     <div id="category_box" style="height: 200px;">
-                        <img src="https://img.icons8.com/cotton/64/000000/confetti--v1.png" style="height: 12%;">
-                        <h3 style="display: inline">Outside Work</h3>
+                        <img src="https://img.icons8.com/bubbles/50/000000/natural-food.png" style="height: 12%;">
+                        <p id="title">Outside Work</p>
                         <ul>
                             <li class="li" style="list-style: none;">
-                                <div style="text-align: left; font-size: 120%">
+                                <div id="card">
                                   <% superlatives.forEach(function(superlative){ %>
                                     <% if (superlative.outside_work) { %>
-                                        <input type="checkbox" name="outside_work" style="height: 17px; width: 17px" onclick="" value= "<%= superlative.outside_work %>">
+                                        <input id="checkbox" type="checkbox" name="outside_work" style="height: 17px; width: 17px" onclick="" value= "<%= superlative.outside_work %>">
                                           <%= superlative.outside_work %>
                                           <br>
                                     <% } %>

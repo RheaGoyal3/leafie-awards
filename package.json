@@ -18,6 +18,8 @@
   },
   "homepage": "https://github.com/RheaGoyal3/leafie-awards#readme",
   "dependencies": {
+    "body": "^5.1.0",
+    "body-parser": "^1.19.0",
     "ejs": "*",
     "express": "*",
     "mongodb": "*",

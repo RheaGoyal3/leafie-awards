@@ -6,7 +6,7 @@ const app = express();
 const port = 3000;
 const MongoClient = require('mongodb').MongoClient;
 
-const uri = 'mongodb+srv://sam:sam1@cluster0-nge8c.mongodb.net/test?retryWrites=true&w=majority';
+const uri = "mongodb+srv://rhea:rhea1@cluster0-nge8c.mongodb.net/test?retryWrites=true&w=majority";
 const dbName = 'leafie_awards';
 let peopleArray = [];
 let superlativesArray = [];
@@ -40,7 +40,7 @@ MongoClient.connect(uri, { useNewUrlParser: true }, (err, client) => {
 
 app.engine('html', require('ejs').renderFile);
 
-app.get('/leafie-awards', (req, res) => {
+app.get('/nominate', (req, res) => {
   res.render(__dirname + '/index.html', { people: peopleArray, superlatives: superlativesArray });
 });
 
