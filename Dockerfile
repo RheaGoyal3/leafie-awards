@@ -1,5 +1,4 @@
-# Use node 4.4.5 LTS
-FROM node:4.4.5
+FROM node:10.15.1
 EXPOSE 8080
 COPY . /
 WORKDIR /
