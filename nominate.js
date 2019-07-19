@@ -74,7 +74,7 @@ MongoClient.connect(uri, { useNewUrlParser: true }, (err, client) => {
 
 app.engine('html', require('ejs').renderFile);
 
-app.get('/nominate', /*oidc.ensureAuthenticated(),*/ (req, res) => {
+app.get('/welcome', /*oidc.ensureAuthenticated(),*/ (req, res) => {
   res.render(__dirname + '/index.html', { people: peopleArray, superlatives: superlativesArray });
 });
 
