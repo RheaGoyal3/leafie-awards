@@ -7,9 +7,48 @@ html, body {
         font-family: Akzidenz Grotesk BQ Light,Helvetica,Arial;
 }
 
+.bg-1 {
+    background-color: #116149;
+    color:  #B8E6CB;
+}
+
+.bg-2 {
+    background-color: #FAFBFC;
+    color: #21313C;
+}
+
+.bg-3 {
+    background-color: #21313C;
+    color: #ffffff;
+}
+
+.btn {
+    text-align: center;
+    color: aliceblue;
+    padding-top: 12px;
+    border-radius: 25px;
+    outline: none;
+    background-color: #13AA52;
+}
+
+.btn:hover {
+    background-color: #12924F;
+    color: white;
+}
+
 .category {
     height: 200px;
-    margin-right: 0;
+}
+
+.container-fluid {
+    padding-top: 50px;
+    padding-bottom: 70px;
+}
+
+#card {
+    font-size: 130%;
+    text-align: left;
+    font-weight: 300;
 }
 
 #category_box {
@@ -19,6 +58,11 @@ html, body {
     padding: 1.5%;
     width: 95%;
     height: 200px;
+}
+
+#checkbox {
+    height: 20px;
+    width: 20px;
 }
 
 #interndrop {
@@ -36,68 +80,20 @@ html, body {
     color: #ffffff;
 }
 
-#welcome {
-    background-color: #116149;
-    color:  #B8E6CB;
-    padding-bottom: 1%
-}
-
-#welcomepanel {
-    padding-top: 1%;
-    padding-bottom: 0.5%
-}
-
-#card {
-    font-size: 130%;
-    text-align: left;
-    font-weight: 300;
-}
-
-#checkbox {
-    height: 20px;
-    width: 20px;
-}
-
 #title {
     display: inline;
     font-size: 160%;
     font-weight: 250%;
     vertical-align: middle;
 }
-.bg-1 {
+
+#welcome {
     background-color: #116149;
     color:  #B8E6CB;
+    padding-bottom: 1%;
 }
 
-.bg-2 {
-    background-color: #FAFBFC;
-    color: #21313C;
-}
-
-.bg-3 {
-    background-color: #21313C;
-    color: #ffffff;
-}
-
-.btn:hover {
-    background-color: #13AA52;
-    color: white;
-}
-
-.btn {
-    text-align: center;
-    color: aliceblue;
-    padding-top: 12px;
-    border-radius: 25px;
-    outline: none;
-    background-color: #12924F;
-}
-
-.container-fluid {
-    padding-top: 50px;
-    padding-bottom: 70px;
-}
-
-.no-gutters {
-    margin-right: 0;
+#welcomepanel {
+    padding-top: 1%;
+    padding-bottom: 0.5%
 }

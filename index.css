@@ -14,6 +14,20 @@ img.leafie {
     filter: blur(3px);
 }
 
+.btn {
+    position: relative;
+    text-align: center;
+    color: aliceblue;
+    padding-top: 12px;
+    border-radius: 25px;
+    background-color: #116149;
+}
+
+.btn:hover {
+    background-color: #13AA52;
+    color: white;
+}
+
 .centered {
     position: absolute;
     left: 10%;
@@ -26,21 +40,4 @@ img.leafie {
     background-color: rgba(0,0,0,0.5);
     color: white;
     padding: 20px;
-}
-
-.btn-lg {
-    background-color: #116149;
-}
-
-.btn:hover {
-	background-color: #13AA52;
-	color: white;
-}
-
-.btn {
-    position: relative;
-    text-align: center;
-    color: aliceblue;
-    padding-top: 12px;
-    border-radius: 25px;
 }
