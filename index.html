@@ -1,136 +1,26 @@
 <!doctype html>
-<html lang="en">
-    <head>
-        <title>Leafie Awards!</title>
+<html>
+	<head>
+		<title>Welcome!</title>
         <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-        <link rel="stylesheet" type="text/css" href="nominate.css">
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-        <script src="client.js"></script>
-        <script src="nominate.js"></script>
-    </head>
+        <link rel="stylesheet" type="text/css" href="index.css">
+	</head>
 
-    <body>
-        <!-- Main panel -->
-        <div class="container-fluid bg-1 text-center" id="welcomepanel">
-            <div class="jumbotron" id="welcome">
-                <div class="col-lg">
-                    <h1>Leafie Awards!</h1>
-                    <p style="font-size:203%">~~~ Go ahead and select an intern or recruiter and nominate them for upto 5 awards! ~~~</p>
-                </div>
-            </div>
-        </div>
-<form role="form" action="nominate" method="POST">
-        <!-- Form for nominations -->
-        <div class="container-fluid bg-2 text-center">
-            <!-- Intern dropdown -->
-            <div class="row no-gutters align-items-center" id="interndrop">
-                <div class="col">
-                    <div class="form-group">
-                        <select id="selectedone" class="form-control form-control-lg" name="person" style="font-size: 180%">
-                            <% people.forEach(function(person){ %>
-                                <option name="person" value="<%= person.name %>"> <%= person.name %> </option>
-                            <% }); %>
-                        </select>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Category boxes -->
-            <div class="row no-gutters justify-content-center">
-                <div class="col category">
-                    <div id="category_box" style="height: 300px;">
-                        <img src="https://img.icons8.com/dusk/64/000000/leaf.png" style="display: inline; height: 25px; width: 25px ">
-                        <p id="title">General</p>
-                        <ul>
-                            <li class="li" style="list-style: none;">
-                                <div id="card">
-                                  <% superlatives.forEach(function(superlative){ %>
-                                    <% if (superlative.general) { %>
-                                        <input id="checkbox" type="checkbox" name="general" value="<%= superlative.general %>" style="height: 17px; width: 17px" onclick="">
-                                          <%= superlative.general %>
-                                          <br>
-                                    <% } %>
-                                  <% }); %>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col category">
-                    <div id="category_box" style="height: 300px;">
-                        <img src="https://img.icons8.com/color/48/000000/nintendo-gamecube-controller.png" style="height: 12%;">
-                        <p id="title">Games/Sports</p>
-                        <ul>
-                            <li class="li" style="list-style: none;">
-                                <div id="card">
-                                  <% superlatives.forEach(function(superlative){ %>
-                                    <% if (superlative.sports_games) { %>
-                                        <input id="checkbox" type="checkbox" name="sports_games" value="<%= superlative.sports_games %>" style="height: 17px; width: 17px" onclick="">
-                                          <%= superlative.sports_games %>
-                                          <br>
-                                    <% } %>
-                                  <% }); %>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <br><br><br><br><br><br><br><br>
-            <div class="row no-gutters align-items-center">
-                <div class="col category">
-                    <div id="category_box" style="height: 300px;">
-                        <img src="https://img.icons8.com/ios-filled/50/000000/programming.png" style="height: 12%;">
-                        <p id="title">Work</p>
-                        <ul>
-                            <li class="li" style="list-style: none;">
-                                <div id="card">
-                                  <% superlatives.forEach(function(superlative){ %>
-                                    <% if (superlative.work) { %>
-                                        <input id="checkbox" type="checkbox" name="work" value="<%= superlative.work %>" style="height: 17px; width: 17px" onclick="">
-                                          <%= superlative.work %>
-                                          <br>
-                                    <% } %>
-                                  <% }); %>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col category">
-                    <div id="category_box" style="height: 300px;">
-                        <img src="https://img.icons8.com/bubbles/50/000000/natural-food.png" style="height: 17%;">
-                        <p id="title">Outside Work</p>
-                        <ul>
-                            <li class="li" style="list-style: none;">
-                                <div id="card">
-                                  <% superlatives.forEach(function(superlative){ %>
-                                    <% if (superlative.outside_work) { %>
-                                        <input id="checkbox" type="checkbox" name="outside_work" style="height: 17px; width: 17px" onclick="" value= "<%= superlative.outside_work %>">
-                                          <%= superlative.outside_work %>
-                                          <br>
-                                    <% } %>
-                                  <% }); %>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <br><br><br><br><br><br><br><br>
-            <!-- Submit button -->
-            <button type="submit" class="btn btn-success" id="nominate_button" style="font-size: 150%">Nominate</button>
-        </div>
-</form>
-
-        <!-- Thank you panel -->
-        <div class="container-fluid bg-3 text-center" style="padding:0.25%">
-            <div class="jumbotron" id="thankyou" style="padding-bottom:1%">
-                <h2>Thank you for voting! :)</h2>
-                <p>Feel free to slack us if you have any questions! - Elizabeth Han, Rhea Goyal, Sam Pal, Sandy Gould </p>
-            </div>
-        </div>
-    </body>
+	<body>
+		<img class="leafie" src="leafie_awards.jpg">
+		<div class="centered">
+			<h3>Welcome to the Leafie Awards!</h3>
+			<br>
+			<a href="nominate.html">
+				<button type="button" class="btn btn-lg">Nominate an intern</button>
+			</a>
+			<a href="https://sites.google.com/10gen.com/nyc-intern-program-2019/meet-the-interns?authuser=0" target="_blank">
+				<button type="button" class="btn btn-lg">View the list of interns</button>
+			</a>
+			<a href="#" target="_blank">
+				<button type="button" class="btn btn-lg">View all superlative categories</button>
+			</a>
+		</div>
+	</body>
 </html>
