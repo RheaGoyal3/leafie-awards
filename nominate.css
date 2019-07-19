@@ -47,7 +47,7 @@ html, body {
 }
 
 #card {
-    font-size: 200%;
+    font-size: 150%;
     text-align: left;
     font-weight: 300;
 }
@@ -59,7 +59,7 @@ html, body {
 
 #title {
     display: inline;
-    font-size: 230%;
+    font-size: 180%;
     font-weight: 250%;
     vertical-align: middle;
 }
