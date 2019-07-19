@@ -1,0 +1,46 @@
+@import url('https://fonts.googleapis.com/css?family=Numans');
+
+html, body {
+        background-size: cover;
+        background-repeat: repeat;
+        height: 100%;
+        font-family: 'Numans', sans-serif;
+}
+
+img.leafie {
+    height: 100%;
+    min-height: 500px;
+    width: 100%;
+    filter: blur(3px);
+}
+
+.centered {
+    position: absolute;
+    left: 10%;
+    right: 10%;
+    margin-top: 50px;
+    top: 25%;
+    text-align: center;
+    /*background-color: rgba(255,255,255,0.5);
+    color: black;*/
+    background-color: rgba(0,0,0,0.5);
+    color: white;
+    padding: 20px;
+}
+
+.btn-lg {
+    background-color: #116149;
+}
+
+.btn:hover {
+	background-color: #13AA52;
+	color: white;
+}
+
+.btn {
+    position: relative;
+    text-align: center;
+    color: aliceblue;
+    padding-top: 12px;
+    border-radius: 25px;
+}
