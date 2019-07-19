@@ -43,7 +43,7 @@ const oidc = new ExpressOIDC({
 app.use(oidc.router);
 
 oidc.on('ready', () => {
-  app.listen(3000, () => console.log(`Started!`));
+  app.listen(8080, () => console.log(`Started!`));
 });
 
 oidc.on('error', err => {
