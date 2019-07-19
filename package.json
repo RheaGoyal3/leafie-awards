@@ -18,12 +18,14 @@
   },
   "homepage": "https://github.com/RheaGoyal3/leafie-awards#readme",
   "dependencies": {
+    "@okta/oidc-middleware": "^1.0.2",
+    "@okta/okta-sdk-nodejs": "^2.0.0",
     "body": "^5.1.0",
-    "body-parser": "^1.19.0",
+    "body-parser": "*",
+    "dotenv": "^6.1.0",
     "ejs": "*",
     "express": "*",
-    "mongodb": "*",
-    "parser": "^0.1.4",
-    "pug": "^2.0.4"
+    "express-session": "^1.15.6",
+    "mongodb": "*"
   }
 }
