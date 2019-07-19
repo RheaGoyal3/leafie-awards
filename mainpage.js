@@ -74,11 +74,11 @@ MongoClient.connect(uri, { useNewUrlParser: true }, (err, client) => {
 
 app.engine('html', require('ejs').renderFile);
 
-app.get('/nominate', oidc.ensureAuthenticated(), (req, res) => {
+app.get('/nominate', /*oidc.ensureAuthenticated(),*/ (req, res) => {
   res.render(__dirname + '/index.html', { people: peopleArray, superlatives: superlativesArray });
 });
 
-app.post('/nominate', oidc.ensureAuthenticated(), (req, res) => {
+app.post('/nominate', /*oidc.ensureAuthenticated(),*/ (req, res) => {
   const name = req.body.person;
   const work = Array.isArray(req.body.work) ? req.body.work : [req.body.work];
   const sports_games = Array.isArray(req.body.sports_games) ? req.body.sports_games : [req.body.sports_games];
