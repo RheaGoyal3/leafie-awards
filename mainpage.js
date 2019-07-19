@@ -44,7 +44,7 @@ app.get('/nominate', (req, res) => {
   res.render(__dirname + '/index.html', { people: peopleArray, superlatives: superlativesArray });
 });
 
-app.post('/form', (req, res) => {
+app.post('/nominate', (req, res) => {
   const name = req.body.person;
   const work = Array.isArray(req.body.work) ? req.body.work : [req.body.work];
   const sports_games = Array.isArray(req.body.sports_games) ? req.body.sports_games : [req.body.sports_games];
@@ -60,7 +60,8 @@ app.post('/form', (req, res) => {
     }
     people.updateOne( { name: name }, { $set : { nominations : dict }})
   });
-  res.send(JSON.stringify(req.body));
+  // res.status(204).send();
+  res.render(__dirname + '/index.html', { people: peopleArray, superlatives: superlativesArray });
 });
 
 app.get('/result', (req, res) => {
