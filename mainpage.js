@@ -63,6 +63,8 @@ MongoClient.connect(uri, { useNewUrlParser: true }, (err, client) => {
     superlatives.find().forEach((doc) => {
       superlativesArray.push(doc);
     }).then(() => {
+      //use the below to reset people db
+      // people.updateMany({}, { $unset: { nominations: "", voters: ""} })
         // client.close()
     });
   });
