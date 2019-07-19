@@ -78,6 +78,10 @@ app.get('/welcome', /*oidc.ensureAuthenticated(),*/ (req, res) => {
   res.render(__dirname + '/index.html', { people: peopleArray, superlatives: superlativesArray });
 });
 
+app.get('/nominate', /*oidc.ensureAuthenticated(),*/ (req, res) => {
+  res.render(__dirname + '/nominate.html', { people: peopleArray, superlatives: superlativesArray });
+});
+
 app.post('/nominate', /*oidc.ensureAuthenticated(),*/ (req, res) => {
   const name = req.body.person;
   const work = Array.isArray(req.body.work) ? req.body.work : [req.body.work];
