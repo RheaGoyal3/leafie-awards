@@ -51,7 +51,19 @@ app.post('/form', (req, res) => {
   const outside_work = Array.isArray(req.body.outside_work) ? req.body.outside_work : [req.body.outside_work];
   const general = Array.isArray(req.body.general) ? req.body.general : [req.body.general];
   const noms = [...work, ...sports_games, ...outside_work, ...general].filter(x => x);
-  // people.aggregate([ {$group : { nominations: "$nominations", count : {$sum : 1}}} ]);
-  people.updateOne( { name: name }, { $set : { "nominations" : noms }})
+
+  people.findOne({ name : name }).then((result) => {
+    const dict = result.nominations || {};
+    for (let i = 0; i < noms.length; i++) {
+      if (dict[noms[i]]) dict[noms[i]] += 1;
+      else dict[noms[i]] = 1;
+    }
+    people.updateOne( { name: name }, { $set : { nominations : dict }})
+  });
   res.send(JSON.stringify(req.body));
+});
+
+app.get('/result', (req, res) => {
+  people.aggregate([ {$group : { nominations: "$nominations", count : {$sum : 1}}} ]);
+  res.send('helllo');
 });
