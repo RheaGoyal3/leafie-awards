@@ -86,7 +86,7 @@ app.post('/nominate', /*oidc.ensureAuthenticated(),*/ (req, res) => {
   const general = Array.isArray(req.body.general) ? req.body.general : [req.body.general];
   const noms = [...work, ...sports_games, ...outside_work, ...general].filter(x => x);
 
-  const user = req.userContext.userinfo.name;
+  const user = "test user";/*req.userContext.userinfo.name;*/
 
   people.findOne({ name : name }).then((result) => {
     if (!result.voters || !result.voters.contains(user)) {
