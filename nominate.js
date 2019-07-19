@@ -99,7 +99,7 @@ app.post('/nominate', /*oidc.ensureAuthenticated(),*/ (req, res) => {
     }
   });
   // res.status(204).send();
-  res.render(__dirname + '/nominate.html', { people: peopleArray, superlatives: superlativesArray });
+  res.render(__dirname + '/nominate', { people: peopleArray, superlatives: superlativesArray });
 });
 
 app.get('/result', (req, res) => {
