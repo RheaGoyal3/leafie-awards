@@ -22,7 +22,7 @@ app.use(bodyParser.json())
 
 //auth
 const session = require('express-session');
-const { ExpressOIDC } = require('@okta/oidc-middleware');
+const ExpressOIDC = require('@okta/oidc-middleware').ExpressOIDC;
 
 // session support is required to use ExpressOIDC
 app.use(session({
