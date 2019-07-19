@@ -4,7 +4,7 @@ html, body {
         background-size: cover;
         background-repeat: repeat;
         height: 100%;
-        font-family: 'Numans', sans-serif;
+        font-family: Akzidenz Grotesk BQ Light,Helvetica,Arial;
 }
 
 .category {
@@ -49,6 +49,7 @@ html, body {
 #card {
     font-size: 200%;
     text-align: left;
+    font-weight: 300;
 }
 
 #checkbox {
