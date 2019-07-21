@@ -1,12 +1,16 @@
 'use strict';
-require('dotenv').config()
+// require('dotenv').config()
 
 const express = require('express');
+const session = require('express-session');
 const bodyParser = require('body-parser');
 const path = require('path');
 const app = express();
 const port = 8080;
 const MongoClient = require('mongodb').MongoClient;
+
+const auth = require('./auth');
+const passport = require('passport');
 
 const uri = "mongodb+srv://rhea:rhea1@cluster0-nge8c.mongodb.net/test?retryWrites=true&w=majority";
 const dbName = 'leafie_awards';
@@ -14,41 +18,44 @@ let peopleArray = [];
 let superlativesArray = [];
 let db, people, superlatives;
 
+app.engine('html', require('ejs').renderFile);
+
 app.use(express.static(__dirname));
-
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.text({ type: 'application/json' }))
-app.use(bodyParser.json())
 
-// //auth
-// const session = require('express-session');
-// const ExpressOIDC = require('@okta/oidc-middleware').ExpressOIDC;
+auth(passport);
+app.use(session({
+  secret: 'anything',
+  resave: false,
+  saveUninitialized: true
+}));
+app.use(passport.initialize());
+app.use(passport.session());
 
-// // session support is required to use ExpressOIDC
-// app.use(session({
-//   secret: process.env.APP_SECRET,
-//   resave: true,
-//   saveUninitialized: false
-// }));
+app.get('/logout', (req, res) => {
+  req.logout();
+  req.session = null;
+  res.redirect('/');
+});
 
-// const oidc = new ExpressOIDC({
-//   issuer: `${process.env.OKTA_ORG_URL}/oauth2/default`,
-//   client_id: process.env.OKTA_CLIENT_ID,
-//   client_secret: process.env.OKTA_CLIENT_SECRET,
-//   redirect_uri: `${process.env.HOST_URL}/authorization-code/callback`,
-//   scope: 'openid profile'
-// });
+app.get('/', (req, res) => {
+  if (req.isAuthenticated()) {
+      res.redirect('/nominate');
+  } else {
+      res.redirect('/auth/google');
+  }
+});
 
-// // ExpressOIDC will attach handlers for the /login and /authorization-code/callback routes
-// app.use(oidc.router);
+app.get('/auth/google',
+  passport.authenticate('google', {scope: ['profile', 'email']})
+);
 
-// oidc.on('ready', () => {
-//   app.listen(8080, () => console.log(`Started!`));
-// });
-
-// oidc.on('error', err => {
-//   console.log('Unable to configure ExpressOIDC', err);
-// });
+app.get('/auth/google/callback',
+  passport.authenticate('google', {
+      successRedirect: '/nominate',
+      failureRedirect: '/fail'
+  })
+);
 
 MongoClient.connect(uri, { useNewUrlParser: true }, (err, client) => {
   if (err) console.log(err);
@@ -62,9 +69,12 @@ MongoClient.connect(uri, { useNewUrlParser: true }, (err, client) => {
   }).then(() => {
     superlatives.find().forEach((doc) => {
       superlativesArray.push(doc);
+      // var val = doc.general || doc.work || doc.outside_work || doc.sports_games;
+      // superlatives.updateOne({"_id": doc._id}, {$set : {"superlative" : val}});
     }).then(() => {
       //use the below to reset people db
       // people.updateMany({}, { $unset: { nominations: "", voters: ""} })
+      // superlatives.updateMany({}, { $unset: { nominations: ""} });
         // client.close()
     });
   });
@@ -72,13 +82,17 @@ MongoClient.connect(uri, { useNewUrlParser: true }, (err, client) => {
   app.listen(port, () => console.log(`Example app listening on port ${port}!`));
 });
 
-app.engine('html', require('ejs').renderFile);
-
-app.get('/nominate', /*oidc.ensureAuthenticated(),*/ (req, res) => {
-  res.render(__dirname + '/index.html', { people: peopleArray, superlatives: superlativesArray });
+app.get('/nominate', (req, res) => {
+  if (req.isAuthenticated()) {
+    res.render(__dirname + '/index.html', { people: peopleArray, superlatives: superlativesArray });
+  } else {
+    res.redirect('/auth/google');
+  }
 });
 
-app.post('/nominate', /*oidc.ensureAuthenticated(),*/ (req, res) => {
+app.post('/nominate', (req, res) => {
+  // console.log('req.user: ', req.user)
+
   const name = req.body.person;
   const work = Array.isArray(req.body.work) ? req.body.work : [req.body.work];
   const sports_games = Array.isArray(req.body.sports_games) ? req.body.sports_games : [req.body.sports_games];
@@ -86,19 +100,21 @@ app.post('/nominate', /*oidc.ensureAuthenticated(),*/ (req, res) => {
   const general = Array.isArray(req.body.general) ? req.body.general : [req.body.general];
   const noms = [...work, ...sports_games, ...outside_work, ...general].filter(x => x);
 
-  const user = "test user";/*req.userContext.userinfo.name;*/
+  const user = req.user.profile.displayName;//"test user";
 
-  people.findOne({ name : name }).then((result) => {
-    if (!result.voters || !result.voters.contains(user)) {
-      const dict = result.nominations || {};
-      for (let i = 0; i < noms.length; i++) {
-        if (dict[noms[i]]) dict[noms[i]] += 1;
-        else dict[noms[i]] = 1;
-      }
-      people.updateOne( { name: name }, { $set : { nominations : dict }, $push : { voters : user }})
+  people.findOne({ name : name }).then((person) => {
+    if (person && (!person.voters || person.voters.indexOf(user) == -1)) {
+      noms.forEach((superlative) => {
+        superlatives.findOne({ superlative : superlative }).then((result) => {
+          const dict = result.nominations || {};
+          if (dict[name]) dict[name] += 1;
+          else dict[name] = 1;
+          superlatives.updateOne({ superlative : superlative }, { $set : { nominations : dict } });
+        });
+      });
+      people.updateOne({ name: name }, { $push : { voters : user } });
     }
   });
-  // res.status(204).send();
   res.render(__dirname + '/index.html', { people: peopleArray, superlatives: superlativesArray });
 });
 

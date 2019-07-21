@@ -26,6 +26,10 @@
     "ejs": "*",
     "express": "*",
     "express-session": "^1.15.6",
-    "mongodb": "*"
+    "mongodb": "*",
+    "cookie-parser": "^1.4.3",
+    "cookie-session": "^2.0.0-alpha.2",
+    "passport": "^0.3.2",
+    "passport-google-oauth": "^1.0.0"
   }
 }
