@@ -3,4 +3,6 @@ EXPOSE 8080
 COPY . /
 WORKDIR /
 RUN npm install
+RUN npm install express --save
+RUN npm install auth --save
 CMD ["npm","start"]
