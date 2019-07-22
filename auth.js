@@ -7,7 +7,7 @@ module.exports = (passport) => {
         done(null, user);
     });
     passport.use(new GoogleStrategy({
-        clientID: process.env.CLIENT_SECRET,
+        clientID: process.env.CLIENT_ID,
         clientSecret: process.env.CLIENT_SECRET,
         callbackURL: 'https://leafie-awards.skunkworks.staging.corp.mongodb.com/auth/google/callback'
     },
