@@ -9,7 +9,7 @@ module.exports = (passport) => {
     passport.use(new GoogleStrategy({
         clientID: process.env.CLIENT_ID,
         clientSecret: process.env.CLIENT_SECRET,
-        callbackURL: 'https://leafie-awards.skunkworks.staging.corp.mongodb.com/auth/google'
+        callbackURL: 'https://leafie-awards.skunkworks.staging.corp.mongodb.com/auth/google/callback'
     },
     (token, refreshToken, profile, done) => {
         return done(null, {
