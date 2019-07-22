@@ -81,7 +81,7 @@ app.get('/nominate', (req, res) => {
   if (req.isAuthenticated()) {
     res.render(__dirname + '/nominate.html', { people: peopleArray, superlatives: superlativesArray });
   } else {
-    res.redirect('/auth/google/callback');
+    res.redirect('/auth/google');
   }
 });
 
