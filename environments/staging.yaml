@@ -4,3 +4,6 @@ ingress:
     - leafie-awards.skunkworks.staging.corp.mongodb.com
 service:
   targetPort: 8080
+envSecrets:
+  CLIENT_ID: secrets
+  CLIENT_SECRET: secrets

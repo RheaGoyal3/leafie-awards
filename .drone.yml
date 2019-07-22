@@ -26,6 +26,7 @@ pipeline:
     chart_version: 4.3.4
     tiller_ns: skunkworks
     client_only: true
+    values_files: [ "environments/staging.yml" ]
     values: "image.tag=git-${DRONE_COMMIT_SHA:0:7},image.repository=795250896452.dkr.ecr.us-east-1.amazonaws.com/skunkworks/${DRONE_REPO_NAME},ingress.enabled=true,ingress.hosts[0]=leafie-awards.skunkworks.staging.corp.mongodb.com"
     when:
       branch: master
