@@ -28,6 +28,8 @@
     "express-session": "^1.15.6",
     "mongodb": "*",
     "passport-google-oauth": "*",
-    "passport": "*"
+    "passport": "*",
+    "jsonwebtoken": "*",
+    "cookie-parser": "^1.4.4"
   }
 }
