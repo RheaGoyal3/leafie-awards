@@ -1,5 +1,4 @@
 'use strict';
-// require('dotenv').config()
 const express = require('express');
 const session = require('express-session');
 const bodyParser = require('body-parser');
@@ -7,8 +6,9 @@ const path = require('path');
 const app = express();
 const port = 8080;
 const MongoClient = require('mongodb').MongoClient;
-const auth = require('./auth');
-const passport = require('passport');
+
+const cookieParser = require('cookie-parser');
+const jwt = require('jsonwebtoken');
 
 const uri = "mongodb+srv://rhea:rhea1@cluster0-nge8c.mongodb.net/test?retryWrites=true&w=majority";
 const dbName = 'leafie_awards';
@@ -19,15 +19,8 @@ let db, people, superlatives;
 app.engine('html', require('ejs').renderFile);
 app.use(express.static(__dirname));
 app.use(bodyParser.urlencoded({ extended: true }));
-auth(passport);
-app.use(session({
-  secret: 'anything',
-  resave: false,
-  saveUninitialized: true
-}));
 
-app.use(passport.initialize());
-app.use(passport.session());
+app.use(cookieParser());
 
 app.get('/logout', (req, res) => {
   req.logout();
@@ -36,23 +29,12 @@ app.get('/logout', (req, res) => {
 });
 
 app.get('/', (req, res) => {
-  if (req.isAuthenticated()) {
-    res.redirect('/nominate');
-  } else {
-    res.redirect('/auth/google');
-  }
+  console.log('req.headers.cookie ', req.headers.cookie);
+  // jwt.decode(req.headers.cookie['connect.sid']);
+//   // if (req.isAuthenticated()) {
+//     res.redirect('/nominate');
+//   // }
 });
-
-app.get('/auth/google',
-  passport.authenticate('google', {scope: ['profile', 'email']})
-);
-
-app.get('/auth/google/callback',
-  passport.authenticate('google', {
-    successRedirect: '/nominate',
-    failureRedirect: '/fail'
-  })
-);
 
 MongoClient.connect(uri, { useNewUrlParser: true }, (err, client) => {
   if (err) console.log(err);
@@ -78,14 +60,16 @@ MongoClient.connect(uri, { useNewUrlParser: true }, (err, client) => {
 });
 
 app.get('/nominate', (req, res) => {
-  if (req.isAuthenticated()) {
+  // if (req.isAuthenticated()) {
+  console.log('1req.cookies ', req.cookies);
+  // var decoded = jwt.decode();
+  // console.log('decoded ', decoded)
     res.render(__dirname + '/nominate.html', { people: peopleArray, superlatives: superlativesArray });
-  } else {
-    res.redirect('/auth/google');
-  }
+  // }
 });
 
 app.post('/nominate', (req, res) => {
+  console.log('req.cookies ', req.cookies);
   // console.log('req.user: ', req.user)
   const name = req.body.person;
   const work = Array.isArray(req.body.work) ? req.body.work : [req.body.work];
