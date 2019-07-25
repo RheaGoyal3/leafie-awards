@@ -51,6 +51,10 @@ app.get('/nominate', (req, res) => {
 app.post('/nominate', (req, res) => {
   const user = req.cookies.auth_token;
 
+  if (!user) {
+    res.redirect('https://login.corp.mongodb.com');
+  }
+
   const name = req.body.person;
   const work = Array.isArray(req.body.work) ? req.body.work : [req.body.work];
   const sports_games = Array.isArray(req.body.sports_games) ? req.body.sports_games : [req.body.sports_games];
@@ -80,7 +84,11 @@ app.get('/result', (req, res) => {
 });
 
 app.get('/welcome', (req, res) => {
-  res.render(__dirname + '/index.html', { people: peopleArray, superlatives: superlativesArray });
+  if (req.isAuthenticated()) {
+    res.render(__dirname + '/index.html', { people: peopleArray, superlatives: superlativesArray });
+  } else {
+    res.redirect('/auth/google');
+  }
 });
 
 app.get('/result', (req, res) => {
