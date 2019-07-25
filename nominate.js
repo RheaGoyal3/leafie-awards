@@ -45,6 +45,12 @@ MongoClient.connect(uri, { useNewUrlParser: true }, (err, client) => {
 });
 
 app.get('/nominate', (req, res) => {
+  const user = req.cookies.auth_user;
+
+  if (!user){
+    return res.redirect('https://login.corp.mongodb.com/');
+  }
+
   res.render(__dirname + '/nominate.html', { people: peopleArray, superlatives: superlativesArray });
 });
 
@@ -74,13 +80,13 @@ app.post('/nominate', (req, res) => {
   res.render(__dirname + '/nominate.html', { people: peopleArray, superlatives: superlativesArray });
 });
 
+app.get('/', (req, res) => {
+  res.render(__dirname + '/index.html');
+});
+
 app.get('/result', (req, res) => {
   // people.aggregate([ {$group : { nominations: "$nominations", count : {$sum : 1}}} ]);
   res.send('helllo');
-});
-
-app.get('/welcome', (req, res) => {
-  res.render(__dirname + '/index.html', { people: peopleArray, superlatives: superlativesArray });
 });
 
 app.get('/result', (req, res) => {
