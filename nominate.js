@@ -49,7 +49,7 @@ app.get('/nominate', (req, res) => {
 });
 
 app.post('/nominate', (req, res) => {
-  const user = req.cookies.auth_user;
+  const user = req.cookies.auth_token;
 
   const name = req.body.person;
   const work = Array.isArray(req.body.work) ? req.body.work : [req.body.work];
