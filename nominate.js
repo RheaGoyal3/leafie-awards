@@ -101,12 +101,3 @@ app.get('/result', (req, res) => {
   people.aggregate([ {$group : { nominations: "$nominations", count : {$sum : 1}}} ]);
   res.send('Hello! results aren\'t out yet');
 });
-
-function is_authed(){
-  const user = req.cookies.auth_user;
-
-  if (!user) {
-    res.redirect('https://login.corp.mongodb.com');
-    return;
-  }
-}

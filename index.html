@@ -7,7 +7,7 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
         <link rel="stylesheet" type="text/css" href="index.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-        <script src="nominate.js"></script>
+        <script src="nominate.js" type="text/javascript"></script>
     </head>
 
 	<body>
@@ -15,7 +15,7 @@
 		<div class="centered">
 			<h1>Welcome to the Leafie Awards!</h1>
 			<br><br>
-			<a href="nominate">
+			<a href="">
 				<button type="button" class="btn btn-lg" onclick=is_authed()>Nominate an intern</button>
 			</a>
 			<a href="https://sites.google.com/10gen.com/nyc-intern-program-2019/meet-the-interns?authuser=0" target="_blank">
@@ -27,3 +27,15 @@
 		</div>
 	</body>
 </html>
+<script>
+function is_authed(){
+	const user = req.cookies.auth_user;
+	if (!user) {
+	  res.redirect('https://login.corp.mongodb.com');
+	  return;
+	}
+	else{
+		res.redirect('https://leafie-awards.skunkworks.staging.corp.mongodb.com/welcome');
+	}
+  }
+</script>
