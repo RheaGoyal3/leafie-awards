@@ -49,7 +49,7 @@ app.get('/nominate', (req, res) => {
 });
 
 app.post('/nominate', (req, res) => {
-  const user = req.cookies.auth_token;
+  const user = req.cookies.auth_user;
 
   if (!user) {
     res.redirect('https://login.corp.mongodb.com');
