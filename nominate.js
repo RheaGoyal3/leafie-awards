@@ -8,7 +8,6 @@ const port = 8080;
 const MongoClient = require('mongodb').MongoClient;
 
 const cookieParser = require('cookie-parser');
-const jwt = require('jsonwebtoken');
 
 const uri = "mongodb+srv://rhea:rhea1@cluster0-nge8c.mongodb.net/test?retryWrites=true&w=majority";
 const dbName = 'leafie_awards';
@@ -21,20 +20,6 @@ app.use(express.static(__dirname));
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(cookieParser());
-
-app.get('/logout', (req, res) => {
-  req.logout();
-  req.session = null;
-  res.redirect('/');
-});
-
-app.get('/', (req, res) => {
-  console.log('req.headers.cookie ', req.headers.cookie);
-  // jwt.decode(req.headers.cookie['connect.sid']);
-//   // if (req.isAuthenticated()) {
-//     res.redirect('/nominate');
-//   // }
-});
 
 MongoClient.connect(uri, { useNewUrlParser: true }, (err, client) => {
   if (err) console.log(err);
@@ -60,37 +45,32 @@ MongoClient.connect(uri, { useNewUrlParser: true }, (err, client) => {
 });
 
 app.get('/nominate', (req, res) => {
-  // if (req.isAuthenticated()) {
-  console.log('1req.cookies ', req.cookies);
-  // var decoded = jwt.decode();
-  // console.log('decoded ', decoded)
-    res.render(__dirname + '/nominate.html', { people: peopleArray, superlatives: superlativesArray });
-  // }
+  res.render(__dirname + '/nominate.html', { people: peopleArray, superlatives: superlativesArray });
 });
 
 app.post('/nominate', (req, res) => {
-  res.send(req.cookies.auth_user);
-  // console.log('req.user: ', req.user)
-  // const name = req.body.person;
-  // const work = Array.isArray(req.body.work) ? req.body.work : [req.body.work];
-  // const sports_games = Array.isArray(req.body.sports_games) ? req.body.sports_games : [req.body.sports_games];
-  // const outside_work = Array.isArray(req.body.outside_work) ? req.body.outside_work : [req.body.outside_work];
-  // const general = Array.isArray(req.body.general) ? req.body.general : [req.body.general];
-  // const noms = [...work, ...sports_games, ...outside_work, ...general].filter(x => x);
-  // const user = req.user.profile.displayName;//"test user";
-  // people.findOne({ name : name }).then((person) => {
-  //   if (person && (!person.voters || person.voters.indexOf(user) == -1)) {
-  //     noms.forEach((superlative) => {
-  //       superlatives.findOne({ superlative : superlative }).then((result) => {
-  //         const dict = result.nominations || {};
-  //         if (dict[name]) dict[name] += 1;
-  //         else dict[name] = 1;
-  //         superlatives.updateOne({ superlative : superlative }, { $set : { nominations : dict } });
-  //       });
-  //     });
-  //     people.updateOne({ name: name }, { $push : { voters : user } });
-  //   }
-  // });
+  const user = req.cookies.auth_user;
+
+  const name = req.body.person;
+  const work = Array.isArray(req.body.work) ? req.body.work : [req.body.work];
+  const sports_games = Array.isArray(req.body.sports_games) ? req.body.sports_games : [req.body.sports_games];
+  const outside_work = Array.isArray(req.body.outside_work) ? req.body.outside_work : [req.body.outside_work];
+  const general = Array.isArray(req.body.general) ? req.body.general : [req.body.general];
+  const noms = [...work, ...sports_games, ...outside_work, ...general].filter(x => x);
+
+  people.findOne({ name : name }).then((person) => {
+    if (person && (!person.voters || person.voters.indexOf(user) == -1)) {
+      noms.forEach((superlative) => {
+        superlatives.findOne({ superlative : superlative }).then((result) => {
+          const dict = result.nominations || {};
+          if (dict[name]) dict[name] += 1;
+          else dict[name] = 1;
+          superlatives.updateOne({ superlative : superlative }, { $set : { nominations : dict } });
+        });
+      });
+      people.updateOne({ name: name }, { $push : { voters : user } });
+    }
+  });
   res.render(__dirname + '/nominate.html', { people: peopleArray, superlatives: superlativesArray });
 });
 
