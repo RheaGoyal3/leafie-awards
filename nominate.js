@@ -80,11 +80,7 @@ app.get('/result', (req, res) => {
 });
 
 app.get('/welcome', (req, res) => {
-  if (req.isAuthenticated()) {
-    res.render(__dirname + '/index.html', { people: peopleArray, superlatives: superlativesArray });
-  } else {
-    res.redirect('/auth/google');
-  }
+  res.render(__dirname + '/index.html', { people: peopleArray, superlatives: superlativesArray });
 });
 
 app.get('/result', (req, res) => {
