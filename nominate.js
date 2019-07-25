@@ -44,6 +44,15 @@ MongoClient.connect(uri, { useNewUrlParser: true }, (err, client) => {
   app.listen(port, () => console.log(`Example app listening on port ${port}!`));
 });
 
+app.post('/', (req, res) => {
+  const user = req.cookies.auth_user;
+
+  if (!user) {
+    res.redirect('https://login.corp.mongodb.com');
+    return;
+  }
+});
+
 app.get('/nominate', (req, res) => {
   res.render(__dirname + '/nominate.html', { people: peopleArray, superlatives: superlativesArray });
 });
@@ -53,6 +62,7 @@ app.post('/nominate', (req, res) => {
 
   if (!user) {
     res.redirect('https://login.corp.mongodb.com');
+    return;
   }
 
   const name = req.body.person;
@@ -87,7 +97,7 @@ app.get('/welcome', (req, res) => {
   const user = req.cookies.auth_user;
 
   if (!user) {
-    res.redirect('https://login.corp.mongodb.com');
+    res.redirect('https://login.corp.mongodb.com'); return;
   }
   if (req.isAuthenticated()) {
     res.render(__dirname + '/index.html', { people: peopleArray, superlatives: superlativesArray });
