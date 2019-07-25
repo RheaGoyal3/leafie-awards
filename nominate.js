@@ -84,7 +84,7 @@ app.get('/result', (req, res) => {
   res.send('helllo');
 });
 
-app.get('/welcome', (req, res) => {
+app.get('/', (req, res) => {
   const user = req.cookies.auth_user;
 
   if (!user) {
