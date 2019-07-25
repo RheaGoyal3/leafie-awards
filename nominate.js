@@ -57,6 +57,11 @@ app.get('/nominate', (req, res) => {
 app.post('/nominate', (req, res) => {
   const user = req.cookies.auth_user;
 
+  if (!user) {
+    res.redirect('https://login.corp.mongodb.com');
+    return;
+  }
+
   const name = req.body.person;
   const work = Array.isArray(req.body.work) ? req.body.work : [req.body.work];
   const sports_games = Array.isArray(req.body.sports_games) ? req.body.sports_games : [req.body.sports_games];
@@ -86,10 +91,10 @@ app.get('/', (req, res) => {
 
 app.get('/result', (req, res) => {
   // people.aggregate([ {$group : { nominations: "$nominations", count : {$sum : 1}}} ]);
-  res.send('helllo');
+  res.send('Hello! results aren\'t out yet');
 });
 
 app.get('/result', (req, res) => {
   people.aggregate([ {$group : { nominations: "$nominations", count : {$sum : 1}}} ]);
-  res.send('helllo');
+  res.send('Hello! results aren\'t out yet');
 });
