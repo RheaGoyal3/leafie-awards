@@ -52,7 +52,7 @@ app.post('/nominate', (req, res) => {
   const user = req.cookies.auth_user;
 
   if (!user) {
-    res.redirect('login.corp.mongodb.com');
+    res.redirect('https://login.corp.mongodb.com');
   }
 
   const name = req.body.person;
