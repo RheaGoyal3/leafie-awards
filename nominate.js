@@ -84,6 +84,11 @@ app.get('/result', (req, res) => {
 });
 
 app.get('/welcome', (req, res) => {
+  const user = req.cookies.auth_user;
+
+  if (!user) {
+    res.redirect('https://login.corp.mongodb.com');
+  }
   if (req.isAuthenticated()) {
     res.render(__dirname + '/index.html', { people: peopleArray, superlatives: superlativesArray });
   } else {
