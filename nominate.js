@@ -75,7 +75,7 @@ app.post('/nominate', (req, res) => {
       noms.forEach((superlative) => {
         superlatives.findOne({ superlative : superlative }).then((result) => {
           const dict = result.nominations || {};
-          if(!person.voters[user].includes(superlative)){
+          if(person.voters[user] && !person.voters[user].includes(superlative)){
             if (dict[name]) { 
               dict[name] += 1;
             } else {
