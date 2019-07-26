@@ -57,10 +57,10 @@ app.get('/nominate', (req, res) => {
 app.post('/nominate', (req, res) => {
   const user = req.cookies.auth_user;
 
-  if (!user) {
-    res.redirect('https://login.corp.mongodb.com');
-    return;
-  }
+  // if (!user) {
+  //   res.redirect('https://login.corp.mongodb.com');
+  //   return;
+  // }
 
   const name = req.body.person;
   const work = Array.isArray(req.body.work) ? req.body.work : [req.body.work];
@@ -70,7 +70,7 @@ app.post('/nominate', (req, res) => {
   const noms = [...work, ...sports_games, ...outside_work, ...general].filter(x => x);
 
   people.findOne({ name : name }).then((person) => {
-    if (person && (!person.voters || person.voters.indexOf(user) == -1)) {
+    if (person && (!person.voters || !person.voters[user])) {
       noms.forEach((superlative) => {
         superlatives.findOne({ superlative : superlative }).then((result) => {
           const dict = result.nominations || {};
@@ -79,8 +79,10 @@ app.post('/nominate', (req, res) => {
           superlatives.updateOne({ superlative : superlative }, { $set : { nominations : dict } });
         });
       });
-      people.updateOne({ name: name }, { $push : { voters : user } });
     }
+    var update = { $push: {} };
+    update.$push['voters.' + user] = noms;
+    people.updateOne({ name: name }, update);
   });
   res.render(__dirname + '/nominate.html', { people: peopleArray, superlatives: superlativesArray });
 });
