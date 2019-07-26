@@ -73,9 +73,9 @@ function superlativeSort(a, b) {
 app.get('/nominate', (req, res) => {
   const user = req.cookies.auth_user;
 
-  // if (!user){
-  //   return res.redirect('https://login.corp.mongodb.com/');
-  // }
+  if (!user){
+    return res.redirect('https://login.corp.mongodb.com/');
+  }
 
   res.render(__dirname + '/nominate.html', { people: peopleArray.sort(peopleSort), superlatives: superlativesArray.sort(superlativeSort) });
 });
@@ -83,10 +83,10 @@ app.get('/nominate', (req, res) => {
 app.post('/nominate', (req, res) => {
   const user = req.cookies.auth_user.replace(/\./,'');
 
-  // if (!user) {
-  //   res.redirect('https://login.corp.mongodb.com');
-  //   return;
-  // }
+  if (!user) {
+    res.redirect('https://login.corp.mongodb.com');
+    return;
+  }
 
   const name = req.body.person;
   const work = Array.isArray(req.body.work) ? req.body.work : [req.body.work];
