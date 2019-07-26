@@ -43,28 +43,50 @@ MongoClient.connect(uri, { useNewUrlParser: true }, (err, client) => {
     });
   });
 
-  peopleArray.sort();
-
   app.listen(port, () => console.log(`Example app listening on port ${port}!`));
 });
+
+function peopleSort(a, b) {
+  const nameA = a.name.toLowerCase();
+  const nameB = b.name.toLowerCase();
+
+  if(nameA < nameB)
+    return -1;
+  if(nameA > nameB)
+    return 1;
+
+  return 0;
+}
+
+function superlativeSort(a, b) {
+  const superlativeA = a.superlative.toLowerCase();
+  const superlativeB = b.superlative.toLowerCase();
+
+  if(superlativeA < superlativeB)
+    return -1;
+  if(superlativeA > superlativeB)
+    return 1;
+
+  return 0;
+}
 
 app.get('/nominate', (req, res) => {
   const user = req.cookies.auth_user;
 
-  if (!user){
-    return res.redirect('https://login.corp.mongodb.com/');
-  }
+  // if (!user){
+  //   return res.redirect('https://login.corp.mongodb.com/');
+  // }
 
-  res.render(__dirname + '/nominate.html', { people: peopleArray, superlatives: superlativesArray });
+  res.render(__dirname + '/nominate.html', { people: peopleArray.sort(peopleSort), superlatives: superlativesArray.sort(superlativeSort) });
 });
 
 app.post('/nominate', (req, res) => {
   const user = req.cookies.auth_user.replace(/\./,'');
 
-  if (!user) {
-    res.redirect('https://login.corp.mongodb.com');
-    return;
-  }
+  // if (!user) {
+  //   res.redirect('https://login.corp.mongodb.com');
+  //   return;
+  // }
 
   const name = req.body.person;
   const work = Array.isArray(req.body.work) ? req.body.work : [req.body.work];
@@ -93,7 +115,7 @@ app.post('/nominate', (req, res) => {
       people.updateOne({ name: name }, update);
     }
   });
-  res.render(__dirname + '/nominate.html', { people: peopleArray, superlatives: superlativesArray });
+  res.render(__dirname + '/nominate.html', { people: peopleArray.sort(peopleSort), superlatives: superlativesArray.sort(superlativeSort) });
 });
 
 app.get('/', (req, res) => {
