@@ -72,10 +72,6 @@ app.post('/nominate', (req, res) => {
 
   people.findOne({ name : name }).then((person) => {
     if (person) {
-      var update = { $addToSet: {} };
-      update.$addToSet['voters.' + user] = { $each: noms };
-      people.updateOne({ name: name }, update);
-
       noms.forEach((superlative) => {
         superlatives.findOne({ superlative : superlative }).then((result) => {
           const dict = result.nominations || {};
@@ -89,6 +85,9 @@ app.post('/nominate', (req, res) => {
           }
         });
       });
+      var update = { $addToSet: {} };
+      update.$addToSet['voters.' + user] = { $each: noms };
+      people.updateOne({ name: name }, update);
     }
   });
   res.render(__dirname + '/nominate.html', { people: peopleArray, superlatives: superlativesArray });
