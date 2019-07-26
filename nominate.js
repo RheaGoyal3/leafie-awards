@@ -76,7 +76,7 @@ app.post('/nominate', (req, res) => {
         superlatives.findOne({ superlative : superlative }).then((result) => {
           const dict = result.nominations || {};
           if(!person.voters || !person.voters[user] || !person.voters[user].includes(superlative)){
-            if (dict[name]) { 
+            if (dict[name]) {
               dict[name] += 1;
             } else {
               dict[name] = 1;
@@ -95,11 +95,6 @@ app.post('/nominate', (req, res) => {
 
 app.get('/', (req, res) => {
   res.render(__dirname + '/index.html');
-});
-
-app.get('/result', (req, res) => {
-  // people.aggregate([ {$group : { nominations: "$nominations", count : {$sum : 1}}} ]);
-  res.send('Hello! results aren\'t out yet');
 });
 
 app.get('/result', (req, res) => {
