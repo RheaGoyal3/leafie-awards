@@ -36,10 +36,10 @@ MongoClient.connect(uri, { useNewUrlParser: true }, (err, client) => {
     // superlatives.updateOne({"_id": doc._id}, {$set : {"superlative" : val}});
     }).then(() => {
     //use the below to reset people db
-    people.updateMany({}, { $unset: { nominations: "", voters: ""} });
-    people.updateMany({}, { $unset: { undefined: ""}});
-    superlatives.updateMany({}, { $unset: { nominations: ""} });
-    client.close()
+    // people.updateMany({}, { $unset: { nominations: "", voters: ""} });
+    // people.updateMany({}, { $unset: { undefined: ""}});
+    // superlatives.updateMany({}, { $unset: { nominations: ""} });
+    // client.close()
     });
   });
   app.listen(port, () => console.log(`Example app listening on port ${port}!`));
