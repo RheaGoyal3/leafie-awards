@@ -71,19 +71,25 @@ app.post('/nominate', (req, res) => {
   const noms = [...work, ...sports_games, ...outside_work, ...general].filter(x => x);
 
   people.findOne({ name : name }).then((person) => {
-    if (person && (!person.voters || !person.voters[user])) {
+    if (person) {
+      var update = { $addToSet: {} };
+      update.$addToSet['voters.' + user] = { $each: noms };
+      people.updateOne({ name: name }, update);
+
       noms.forEach((superlative) => {
         superlatives.findOne({ superlative : superlative }).then((result) => {
           const dict = result.nominations || {};
-          if (dict[name]) dict[name] += 1;
-          else dict[name] = 1;
-          superlatives.updateOne({ superlative : superlative }, { $set : { nominations : dict } });
+          if(!person.voters[user].includes(superlative)){
+            if (dict[name]) { 
+              dict[name] += 1;
+            } else {
+              dict[name] = 1;
+            }
+            superlatives.updateOne({ superlative : superlative }, { $set : { nominations : dict } });
+          }
         });
       });
     }
-    var update = { $addToSet: {} };
-    update.$addToSet['voters.' + user] = { $each: noms };
-    people.updateOne({ name: name }, update);
   });
   res.render(__dirname + '/nominate.html', { people: peopleArray, superlatives: superlativesArray });
 });
