@@ -42,6 +42,9 @@ MongoClient.connect(uri, { useNewUrlParser: true }, (err, client) => {
     // client.close()
     });
   });
+
+  peopleArray.sort();
+
   app.listen(port, () => console.log(`Example app listening on port ${port}!`));
 });
 
