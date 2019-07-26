@@ -36,7 +36,8 @@ MongoClient.connect(uri, { useNewUrlParser: true }, (err, client) => {
     // superlatives.updateOne({"_id": doc._id}, {$set : {"superlative" : val}});
     }).then(() => {
     //use the below to reset people db
-    // people.updateMany({}, { $unset: { nominations: "", voters: ""} })
+    // people.updateMany({}, { $unset: { nominations: "", voters: ""} });
+    // people.updateMany({}, { $unset: { undefined: ""}});
     // superlatives.updateMany({}, { $unset: { nominations: ""} });
     // client.close()
     });
@@ -55,7 +56,7 @@ app.get('/nominate', (req, res) => {
 });
 
 app.post('/nominate', (req, res) => {
-  const user = req.cookies.auth_user;
+  const user = req.cookies.auth_token;
 
   // if (!user) {
   //   res.redirect('https://login.corp.mongodb.com');
@@ -80,8 +81,8 @@ app.post('/nominate', (req, res) => {
         });
       });
     }
-    var update = { $push: {} };
-    update.$push['voters.' + user] = noms;
+    var update = { $addToSet: {} };
+    update.$addToSet['voters.' + user] = { $each: noms };
     people.updateOne({ name: name }, update);
   });
   res.render(__dirname + '/nominate.html', { people: peopleArray, superlatives: superlativesArray });
