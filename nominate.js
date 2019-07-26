@@ -58,10 +58,10 @@ app.get('/nominate', (req, res) => {
 app.post('/nominate', (req, res) => {
   const user = req.cookies.auth_user.replace(/\./,'');
 
-  // if (!user) {
-  //   res.redirect('https://login.corp.mongodb.com');
-  //   return;
-  // }
+  if (!user) {
+    res.redirect('https://login.corp.mongodb.com');
+    return;
+  }
 
   const name = req.body.person;
   const work = Array.isArray(req.body.work) ? req.body.work : [req.body.work];
@@ -75,7 +75,7 @@ app.post('/nominate', (req, res) => {
       noms.forEach((superlative) => {
         superlatives.findOne({ superlative : superlative }).then((result) => {
           const dict = result.nominations || {};
-          if(!person.voters[user] || !person.voters[user].includes(superlative)){
+          if(!person.voters[user].includes(superlative)){
             if (dict[name]) { 
               dict[name] += 1;
             } else {
