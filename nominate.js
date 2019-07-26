@@ -91,7 +91,7 @@ app.post('/nominate', (req, res) => {
       });
     }
   });
-  res.render(__dirname + '/nominate.html', { people: peopleArray.sort(), superlatives: superlativesArray.sort() });
+  res.render(__dirname + '/nominate.html', { people: peopleArray, superlatives: superlativesArray });
 });
 
 app.get('/', (req, res) => {
